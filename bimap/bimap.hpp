@@ -24,9 +24,6 @@ struct bimap
     struct right_iterator;
     struct node;
     
-//    friend left_iterator;
-//    friend right_iterator;
-    
     // Создает bimap не содержащий ни одной пары.
     bimap();
     
@@ -36,6 +33,8 @@ struct bimap
     void clear_all(node*);
     ~bimap();
     
+    bimap(bimap &) = delete;
+    bimap& operator=(bimap const&) = delete;
     // Вставка пары (left, right), возвращает итератор на left.
     // Если такой left или такой right уже присутствуют в bimap, вставка не
     // производится и возвращается end_left().

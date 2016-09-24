@@ -274,13 +274,7 @@ bimap::left_iterator& bimap::left_iterator::operator++() {
 }
 bimap::left_iterator bimap::left_iterator::operator++(int) {
     left_iterator res(*this);
-    if (current -> left_right != nullptr) {
-        current = current -> left_right;
-        while (current -> left_left != nullptr) current = current -> left_left;
-    } else {
-        while ((current -> left_parent != nullptr) && (current -> left_parent -> left_right == current)) current = current -> left_parent;
-        if (current -> left_parent != nullptr) current = current -> left_parent;
-    }
+    ++(*this);
     return res;
 }
 
@@ -296,13 +290,7 @@ bimap::left_iterator& bimap::left_iterator::operator--() {
 }
 bimap::left_iterator bimap::left_iterator::operator--(int) {
     left_iterator res(*this);
-    if (current -> left_left != nullptr) {
-        current = current -> left_left;
-        while (current -> left_right != nullptr) current = current -> left_right;
-    } else {
-        while ((current -> left_parent != nullptr) && (current -> left_parent -> left_left == current)) current = current -> left_parent;
-        if (current -> left_parent != nullptr) current = current -> left_parent;
-    }
+    --(*this);
     return res;
 }
 
@@ -335,13 +323,7 @@ bimap::right_iterator& bimap::right_iterator::operator++() {
 }
 bimap::right_iterator bimap::right_iterator::operator++(int) {
     right_iterator res(*this);
-    if (current -> right_right != nullptr) {
-        current = current -> right_right;
-        while (current -> right_left != nullptr) current = current -> right_left;
-    } else {
-        while ((current -> right_parent != nullptr) && (current -> right_parent -> right_right == current)) current = current -> right_parent;
-        if (current -> right_parent != nullptr) current = current -> right_parent;
-    }
+    ++(*this);
     return res;
 }
 
@@ -357,13 +339,7 @@ bimap::right_iterator& bimap::right_iterator::operator--() {
 }
 bimap::right_iterator bimap::right_iterator::operator--(int) {
     right_iterator res(*this);
-    if (current -> right_left != nullptr) {
-        current = current -> right_left;
-        while (current -> right_right != nullptr) current = current -> right_right;
-    } else {
-        while ((current -> right_parent != nullptr) && (current -> right_parent -> right_left == current)) current = current -> right_parent;
-        if (current -> right_parent != nullptr) current = current -> right_parent;
-    }
+    --(*this);
     return res;
 }
 
@@ -380,23 +356,25 @@ bool bimap::right_iterator::operator!=(const right_iterator right) const {
     return current != right.current;
 }
 
-int main() {
-    bimap a;
-    int sch = 0, genered;
-    vector < int > data;
-    for (int i = 0; i < 50000; i++) {
-        genered = rand();
-        data.push_back(genered);
-        a.insert(genered, rand());
-    }
-    int ind = 0;
-    bimap::left_iterator itt;
-    while (a.begin_left() != a.end_left()) {
-        itt = a.find_left(data[ind]);
-        a.erase(itt);
-        ++ind;
-        ++sch;
-    }
-    
-    cout << sch << endl;
-}
+//int main() {
+//    bimap a;
+//    int sch = 0, genered;
+//    vector < int > data;
+//    for (int i = 0; i < 50000; i++) {
+//        genered = rand();
+//        data.push_back(genered);
+//        a.insert(genered, rand());
+//    }
+//    int ind = 0;
+//    bimap::left_iterator itt;
+//    while (a.begin_left() != a.end_left()) {
+//        itt = a.find_left(data[ind]);
+//        a.erase(itt);
+//        ++ind;
+//        ++sch;
+//    }
+//
+//    cout << sch << endl;
+//    
+//}
+
